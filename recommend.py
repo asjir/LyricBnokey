@@ -23,7 +23,7 @@ if len(args)==3:
 	lyr=' '.join(lyr.replace('\n', ' ').split(' ')[:-12])
 	elmoisedlyr = elmoiser([lyr])
 	elmoisedlyr = elmoisedlyr.reshape((1,1024))
-	lyrArr = svd.transform(elmoisedlyr)
+	lyrArr = elmoisedlyr
 	distances, indices = nbrs.kneighbors(lyrArr)
 	# two cases either its just in the set and:
 	if distances[0,0]<0.01:
@@ -40,21 +40,20 @@ if len(args)==3:
 
 if len(args)>4:
 	lyrs=[]
-	j=0
+	l = []
 	for i in range(len(args)//2):
 		try:
 			lyr, trid = find(args[i*2+1],args[i*2+2])
 		except:
-			j+=1 # to offset 
 			continue
 		
 		lyr=' '.join(lyr.replace('\n', ' ').split(' ')[:-12])
 		
-		
+		l+=[(args[i*2+1],args[i*2+2])]
 		lyrs+=[lyr]
 	elmoisedlyrs = elmoiser(lyrs)
 	elmoisedlyrs = elmoisedlyrs.reshape((-1,1024))
-	lyrs = svd.transform(elmoisedlyrs)
+	lyrs = elmoisedlyrs
 	# Pick the closes one:
 	listened_to = lyrs[0]
 	candidates = lyrs[1:]
@@ -65,10 +64,12 @@ if len(args)>4:
 		d_new = mse(listened_to, candidate)
 		if d_new<d_min:
 			d_min=d_new
-	print(d_min)
+	j=0
+	print("Found data for: ", l)
 	for candidate in candidates:
 		j+=1
+		print(mse(listened_to, candidate))
 		if mse(listened_to, candidate)==d_min:
-			print(args[j*2+1], args[j*2+2])
+			print('Recommendation ', l[j])
 	
 		
