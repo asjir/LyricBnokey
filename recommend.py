@@ -30,12 +30,12 @@ if len(args)==3:
 		resindex = indices[1]
 	else:
 		resindex = indices[0]
-	print(distances[0,0])
+#	print(distances[0,0])
 	#Only lookup left:
 	lookup = np.load('./back/allyrics.npy')
 	resid = lookup[resindex, 1]
 	restrack = requests.get(url+'track.get', {'apikey':apikey, 'track_id':resid}).json()['message']['body']['track']
-	print(lyrArr)
+#	print(lyrArr)
 	print(restrack['track_name'], ' by ', restrack['artist_name'])
 
 if len(args)>4:
@@ -68,7 +68,7 @@ if len(args)>4:
 	print("Found data for: ", l)
 	for candidate in candidates:
 		j+=1
-		print(mse(listened_to, candidate))
+#		print(mse(listened_to, candidate))
 		if mse(listened_to, candidate)==d_min:
 			print('Recommendation ', l[j])
 	

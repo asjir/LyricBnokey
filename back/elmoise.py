@@ -2,6 +2,8 @@ import tensorflow as tf
 import tensorflow_hub as hub
 from tqdm import tqdm
 import numpy as np
+import warnings
+warnings.filterwarnings("ignore")
 def elmoise(string):
 	elmo = hub.Module("https://tfhub.dev/google/elmo/2")
 	embeddings = elmo([string], signature = 'default', as_dict = True)['default']
