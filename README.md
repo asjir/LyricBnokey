@@ -10,4 +10,7 @@ To update database:
 in /back, in order, execute:
 Download data.ipynb - changing artist list whose songs to download
 ELMo data.ipynb
-MakePCA.ipynb - possibly adjusting n components, depending on the plot
+MakePCA.ipynb - possibly adjusting n components, depending on the plot, currently no PCA at all.
+
+Use example:
+python recommend.py 'slipknot' 'the devil in i' 'slipknot' 'psychosocial' 'red hot chilli peppers' 'otherside' 'chase atlantic' 'devilish' 'ariana grande' 'thank u, next' 'red hot chilli peppers' 'californication'
